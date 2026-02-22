@@ -1,0 +1,10 @@
+df = pd.read_csv(path + '/Iris.csv') print("Dataset Preview:")
+print(df.head())
+df.drop("Id", axis=1, inplace=True)
+X = df.drop("Species", axis=1) y = df["Species"]
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=42 )
+model = LogisticRegression(max_iter=200) model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred) conf_matrix = confusion_matrix(y_test, y_pred) class_report = classification_report(y_test, y_pred)
+print(f"\nModel Accuracy: {accuracy:.2f}") print("\nConfusion Matrix:") print(conf_matrix) print("\nClassification Report:") print(class_report)
+print("Iris Flower Classification Completed.")
